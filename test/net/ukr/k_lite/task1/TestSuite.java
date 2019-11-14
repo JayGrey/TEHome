@@ -5,6 +5,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({PercussionFactoryTest.class, WindFactoryTest.class, StringedFactoryTest.class})
+@Suite.SuiteClasses({
+        PercussionFactoryTest.class,
+        WindFactoryTest.class,
+        StringedFactoryTest.class,
+        InstrumentTest.class}
+)
 public class TestSuite {
 }
