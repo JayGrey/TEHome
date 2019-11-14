@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="534.0" y="259.0">net.ukr.k_lite.task1.instruments.stringed.Banjo</node>
+    <node x="1028.0" y="259.0">net.ukr.k_lite.task1.instruments.percussion.Xylophone</node>
+    <node x="611.0" y="333.0">net.ukr.k_lite.task1.instruments.stringed.StringedFactory</node>
+    <node x="136.0" y="259.0">net.ukr.k_lite.task1.instruments.wind.Duduk</node>
+    <node x="650.0" y="259.0">net.ukr.k_lite.task1.instruments.stringed.Harp</node>
+    <node x="756.0" y="259.0">net.ukr.k_lite.task1.instruments.percussion.Bongo</node>
+    <node x="357.0" y="333.0">net.ukr.k_lite.task1.instruments.wind.WindFactory</node>
+    <node x="141.0" y="167.0">net.ukr.k_lite.task1.instruments.wind.Wind</node>
+    <node x="519.0" y="154.0">net.ukr.k_lite.task1.instruments.stringed.Stringed</node>
+    <node x="477.0" y="0.0">net.ukr.k_lite.task1.instruments.Instrument</node>
+    <node x="252.0" y="259.0">net.ukr.k_lite.task1.instruments.wind.Accordion</node>
+    <node x="867.0" y="167.0">net.ukr.k_lite.task1.instruments.percussion.Percussion</node>
+    <node x="0.0" y="333.0">net.ukr.k_lite.task1.instruments.percussion.PercussionFactory</node>
+    <node x="408.0" y="259.0">net.ukr.k_lite.task1.instruments.stringed.Guitar</node>
+    <node x="872.0" y="259.0">net.ukr.k_lite.task1.instruments.percussion.Castanets</node>
+    <node x="0.0" y="259.0">net.ukr.k_lite.task1.instruments.wind.Bagpipe</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="net.ukr.k_lite.task1.instruments.stringed.Banjo" target="net.ukr.k_lite.task1.instruments.stringed.Stringed">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="27.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.percussion.Xylophone" target="net.ukr.k_lite.task1.instruments.percussion.Percussion">
+      <point x="0.0" y="-14.5" />
+      <point x="1096.0" y="234.0" />
+      <point x="988.6666666666666" y="234.0" />
+      <point x="48.66666666666663" y="14.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.wind.Wind" target="net.ukr.k_lite.task1.instruments.Instrument">
+      <point x="0.0" y="-14.5" />
+      <point x="184.0" y="129.0" />
+      <point x="512.0" y="129.0" />
+      <point x="-70.0" y="52.0" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.wind.Bagpipe" target="net.ukr.k_lite.task1.instruments.wind.Wind">
+      <point x="0.0" y="-14.5" />
+      <point x="58.0" y="234.0" />
+      <point x="155.33333333333337" y="234.0" />
+      <point x="-28.66666666666663" y="14.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.wind.Accordion" target="net.ukr.k_lite.task1.instruments.wind.Wind">
+      <point x="0.0" y="-14.5" />
+      <point x="320.0" y="234.0" />
+      <point x="212.66666666666663" y="234.0" />
+      <point x="28.66666666666663" y="14.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.percussion.Percussion" target="net.ukr.k_lite.task1.instruments.Instrument">
+      <point x="0.0" y="-14.5" />
+      <point x="940.0" y="129.0" />
+      <point x="652.0" y="129.0" />
+      <point x="70.0" y="52.0" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.percussion.Bongo" target="net.ukr.k_lite.task1.instruments.percussion.Percussion">
+      <point x="0.0" y="-14.5" />
+      <point x="804.0" y="234.0" />
+      <point x="891.3333333333334" y="234.0" />
+      <point x="-48.66666666666666" y="14.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.wind.Duduk" target="net.ukr.k_lite.task1.instruments.wind.Wind">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.stringed.Stringed" target="net.ukr.k_lite.task1.instruments.Instrument">
+      <point x="0.0" y="-27.5" />
+      <point x="0.0" y="52.0" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.stringed.Harp" target="net.ukr.k_lite.task1.instruments.stringed.Stringed">
+      <point x="0.0" y="-14.5" />
+      <point x="693.0" y="234.0" />
+      <point x="624.0" y="234.0" />
+      <point x="42.0" y="27.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.percussion.Castanets" target="net.ukr.k_lite.task1.instruments.percussion.Percussion">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="net.ukr.k_lite.task1.instruments.stringed.Guitar" target="net.ukr.k_lite.task1.instruments.stringed.Stringed">
+      <point x="0.0" y="-14.5" />
+      <point x="461.0" y="234.0" />
+      <point x="540.0" y="234.0" />
+      <point x="-42.0" y="27.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="526.3333333333334" y="315.7777777777778" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
