@@ -1,6 +1,7 @@
 package net.ukr.k_lite.task1.instruments;
 
-import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class Instrument {
     private String name;
@@ -11,15 +12,15 @@ public abstract class Instrument {
 
 
     public void playMelody(String notes) {
-
-        String acceptableNotes = "CDEFGAB#b";
-        Arrays.stream(notes.split("")).filter(acceptableNotes::contains).forEach(this::playNote);
+        Matcher matcher = Pattern.compile("[A-F]b|[A-F]#|[A-F]").matcher(notes);
+        while (matcher.find()) {
+            playNote(matcher.group());
+        }
     }
 
-
-    // C D E F G A B # b
     public void playNote(String note) {
         System.out.print(note);
+        System.out.print(' ');
     }
 
     public String getName() {
