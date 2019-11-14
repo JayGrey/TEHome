@@ -1,5 +1,7 @@
 package net.ukr.k_lite.task1.instruments;
 
+import java.util.Arrays;
+
 public abstract class Instrument {
     private String name;
 
@@ -8,13 +10,14 @@ public abstract class Instrument {
     }
 
 
-    //todo: C C#
     public void playMelody(String notes) {
-        for (String note : notes.split("")) {
-            playNote(note);
-        }
+
+        String acceptableNotes = "CDEFGAB#b";
+        Arrays.stream(notes.split("")).filter(acceptableNotes::contains).forEach(this::playNote);
     }
 
+
+    // C D E F G A B # b
     public void playNote(String note) {
         System.out.print(note);
     }
