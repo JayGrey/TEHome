@@ -6,6 +6,15 @@ import java.util.stream.DoubleStream;
 public interface Table {
 
     static void print(GenerateStrategy strategy, double from, double to, double step) {
+
+        if (step <= 0.0) {
+            throw new RuntimeException("step must be greater than zero");
+        }
+
+        if (from > to) {
+            throw new RuntimeException("from must be less than to");
+        }
+
         System.out.println("   x   | sin(x)");
         System.out.println("---------------");
         double[] values = strategy.generate(from, to, step);
