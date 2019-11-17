@@ -87,9 +87,6 @@ public class Main {
 
     private static void calculate(int melee, int range) {
         if (melee == 0 && range == 0) {
-            if (values.containsKey("" + leftBranch + '-' + rightBranch)) {
-                return;
-            }
 
             int sum = 0;
             for (int i = 0; i < path.length; i++) {
@@ -102,12 +99,7 @@ public class Main {
                 }
             }
             ///
-            System.out.format("lb:%d rb:%d s=%d%n", leftBranch, rightBranch, sum);
             values.put("" + leftBranch + '-' + rightBranch, sum);
-//            ///
-//            if (sum > pathSum) {
-//                pathSum = sum;
-//            }
             return;
         }
 
