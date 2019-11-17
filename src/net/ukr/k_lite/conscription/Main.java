@@ -21,11 +21,9 @@
 * */
 package net.ukr.k_lite.conscription;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
@@ -36,25 +34,18 @@ public class Main {
     private static int[][] orcs;
 
     private static Army getData() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Army army = null;
 
-        try {
-            int[] header = stringToIntArray(reader.readLine());
-            army = new Army(header[0], header[1], header[2]);
+        Scanner scanner = new Scanner(System.in);
+        Army army = new Army(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
 
-            int[][] orks = new int[2][army.total];
+        int[][] orks = new int[2][army.total];
 
-            for (int i = 0; i < army.total; i++) {
-                int[] orcData = stringToIntArray(reader.readLine());
-                orks[MELEE_INDEX][i] = orcData[MELEE_INDEX];
-                orks[RANGE_INDEX][i] = orcData[RANGE_INDEX];
-            }
-            army.orks = orks;
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i < army.total; i++) {
+            orks[MELEE_INDEX][i] = scanner.nextInt();
+            orks[RANGE_INDEX][i] = scanner.nextInt();
         }
+        army.orks = orks;
+
         return army;
     }
 
@@ -123,12 +114,6 @@ public class Main {
         out.println(solution(getData()));
 
         out.flush();
-    }
-
-    private static int[] stringToIntArray(String input) {
-        return Arrays.stream(input.split("\\s+"))
-                .mapToInt(Integer::parseInt)
-                .toArray();
     }
 
     static class Army {

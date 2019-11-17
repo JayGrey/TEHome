@@ -1,5 +1,8 @@
 package net.ukr.k_lite.conscription;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Permutation {
     private final int[] index;
     private final int[] data;
@@ -11,8 +14,10 @@ public class Permutation {
     }
 
     public static void main(String[] args) {
-        Permutation permutation = new Permutation(new int[]{1, 2, 3, 4});
-        permutation.run(0, 2, 0, 1);
+        Permutation program = new Permutation(new int[]{1, 2, 3, 4});
+//        program.run(0, 2, 0, 1);
+//        program.getInputData();
+        System.out.println(Arrays.deepToString(program.getInputData()));
     }
 
     private void print() {
@@ -28,6 +33,21 @@ public class Permutation {
         }
 
         System.out.println("l:" + resultLeft.toString() + " r:" + resultRight.toString());
+    }
+
+    private int[][] getInputData() {
+        Scanner scanner = new Scanner(System.in);
+        int total = scanner.nextInt();
+        int left = scanner.nextInt();
+        int right = scanner.nextInt();
+
+        int[][] data = new int[2][total];
+        for (int i = 0; i < total; i++) {
+            data[0][i] = scanner.nextInt();
+            data[1][i] = scanner.nextInt();
+        }
+
+        return data;
     }
 
     private void run(int fromLeft, int lengthLeft, int fromRight, int lengthRight) {
