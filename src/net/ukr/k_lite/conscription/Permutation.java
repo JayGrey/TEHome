@@ -12,30 +12,49 @@ public class Permutation {
 
     public static void main(String[] args) {
         Permutation permutation = new Permutation(new int[]{1, 2, 3, 4, 5, 6});
-        permutation.run(0, 5);
+        permutation.run(0, 1, 0, 3);
     }
 
     private void print() {
-        StringBuilder result = new StringBuilder();
+        StringBuilder resultLeft = new StringBuilder();
+        StringBuilder resultRight = new StringBuilder();
+
         for (int i = 0; i < index.length; i++) {
             if (index[i] == 1) {
-                result.append(data[i]);
+                resultLeft.append(data[i]);
+            } else if (index[i] == -1) {
+                resultRight.append(data[i]);
             }
         }
 
-        System.out.println(result.toString());
+        System.out.println("l:" + resultLeft.toString() + " r:" + resultRight.toString());
     }
 
-    private void run(int from, int length) {
-        if (length == 0) {
+    private void run(int fromLeft, int lengthLeft, int fromRight, int lengthRight) {
+        if (lengthLeft == 0 && lengthRight == 0) {
             print();
             return;
         }
-        for (int i = from; i <= index.length - length; i++) {
-            if (index[i] == 0) {
-                index[i] = 1;
-                run(i + 1, length - 1);
-                index[i] = 0;
+
+        // left
+        if (lengthLeft > 0) {
+            for (int i = fromLeft; i <= index.length - lengthLeft; i++) {
+                if (index[i] == 0) {
+                    index[i] = 1;
+                    run(i + 1, lengthLeft - 1, fromRight, lengthRight);
+                    index[i] = 0;
+                }
+            }
+        }
+
+        // right
+        if (lengthRight > 0) {
+            for (int i = fromRight; i <= index.length - lengthRight; i++) {
+                if (index[i] == 0) {
+                    index[i] = -1;
+                    run(fromLeft, lengthLeft, i + 1, lengthRight - 1);
+                    index[i] = 0;
+                }
             }
         }
     }
