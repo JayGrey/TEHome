@@ -39,4 +39,12 @@ public class MainTest {
         assertEquals(3, Main.solution(army));
     }
 
+    @Test
+    public void test5() {
+        Main.Army army = new Main.Army(5, 2, 2);
+        army.setOrks(new int[][]{{5, 6, 7, 2, 8}, {2, 1, 0, 1, 3}});
+
+        assertEquals(24, Main.solution(army));
+    }
+
 }

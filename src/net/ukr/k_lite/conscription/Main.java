@@ -26,12 +26,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
     private static final int MELEE_INDEX = 0;
     private static final int RANGE_INDEX = 1;
-    private static int pathSum = -1;
+    private static int leftBranch = 0;
+    private static int rightBranch = 0;
+    private static Map<String, Integer> values = new HashMap<>();
     private static int[] path;
     private static int[][] orcs;
 
@@ -65,20 +70,27 @@ public class Main {
             return -1;
         }
 
-        pathSum = -1;
+        leftBranch = 0;
+        rightBranch = 0;
 
         path = new int[army.total];
         Arrays.fill(path, 0);
 
         orcs = army.orks;
 
+        values.clear();
+
         calculate(army.grunts, army.headHunters);
 
-        return pathSum;
+        return values.values().stream().max(Comparator.comparingInt(a -> a)).orElse(-1);
     }
 
     private static void calculate(int melee, int range) {
         if (melee == 0 && range == 0) {
+            if (values.containsKey("" + leftBranch + '-' + rightBranch)) {
+                return;
+            }
+
             int sum = 0;
             for (int i = 0; i < path.length; i++) {
                 if (path[i] == 0) {
@@ -89,30 +101,38 @@ public class Main {
                     sum += orcs[MELEE_INDEX][i];
                 }
             }
-            if (sum > pathSum) {
-                pathSum = sum;
-            }
+            ///
+            System.out.format("lb:%d rb:%d s=%d%n", leftBranch, rightBranch, sum);
+            values.put("" + leftBranch + '-' + rightBranch, sum);
+//            ///
+//            if (sum > pathSum) {
+//                pathSum = sum;
+//            }
             return;
         }
 
-        // melee branch
+        // melee branch - left
         for (int i = 0; i < melee; i++) {
             for (int j = 0; j < path.length; j++) {
                 if (path[j] == 0) {
                     path[j] = -1;
+                    leftBranch += j;
                     calculate(melee - 1, range);
                     path[j] = 0;
+                    leftBranch -= j;
                 }
             }
         }
 
-        // range branch
+        // range branch - right
         for (int i = 0; i < range; i++) {
             for (int j = 0; j < path.length; j++) {
                 if (path[j] == 0) {
                     path[j] = 1;
+                    rightBranch += j;
                     calculate(melee, range - 1);
                     path[j] = 0;
+                    rightBranch -= j;
                 }
             }
         }
@@ -146,7 +166,7 @@ public class Main {
             this.headHunters = headHunters;
         }
 
-        public void setOrks(int[][] orks) {
+        void setOrks(int[][] orks) {
             this.orks = orks;
         }
     }
