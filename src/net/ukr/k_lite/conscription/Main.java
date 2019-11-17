@@ -102,6 +102,7 @@ public class Main {
                     path[i] = 0;
                 }
             }
+            return;
         }
 
         // right - range

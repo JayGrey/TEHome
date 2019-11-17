@@ -11,8 +11,8 @@ public class Permutation {
     }
 
     public static void main(String[] args) {
-        Permutation permutation = new Permutation(new int[]{1, 2, 3, 4, 5, 6});
-        permutation.run(0, 0, 0, 6);
+        Permutation permutation = new Permutation(new int[]{1, 2, 3, 4});
+        permutation.run(0, 2, 0, 1);
     }
 
     private void print() {
@@ -45,6 +45,7 @@ public class Permutation {
                     index[i] = 0;
                 }
             }
+            return;
         }
 
         // right
