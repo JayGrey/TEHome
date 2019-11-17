@@ -26,24 +26,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
 
     private static final int MELEE_INDEX = 0;
     private static final int RANGE_INDEX = 1;
-    private static int leftBranch = 0;
-    private static int rightBranch = 0;
-    private static Map<String, Integer> values = new HashMap<>();
+    private static int finalSum;
     private static int[] path;
     private static int[][] orcs;
 
     private static Army getData() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Army army = null;
-
 
         try {
             int[] header = stringToIntArray(reader.readLine());
@@ -70,61 +64,53 @@ public class Main {
             return -1;
         }
 
-        leftBranch = 0;
-        rightBranch = 0;
-
         path = new int[army.total];
         Arrays.fill(path, 0);
 
         orcs = army.orks;
 
-        values.clear();
+        finalSum = -1;
 
-        calculate(army.grunts, army.headHunters);
-
-        return values.values().stream().max(Comparator.comparingInt(a -> a)).orElse(-1);
+        calculate1(0, army.grunts, 0, army.headHunters);
+        return finalSum;
     }
 
-    private static void calculate(int melee, int range) {
-        if (melee == 0 && range == 0) {
-
+    private static void calculate1(int fromLeft, int lengthLeft, int fromRight, int lengthRight) {
+        if (lengthLeft == 0 && lengthRight == 0) {
             int sum = 0;
             for (int i = 0; i < path.length; i++) {
-                if (path[i] == 0) {
-                    sum += Math.max(orcs[MELEE_INDEX][i], orcs[RANGE_INDEX][i]);
+                if (path[i] == -1) {
+                    sum += orcs[MELEE_INDEX][i];
                 } else if (path[i] == 1) {
                     sum += orcs[RANGE_INDEX][i];
-                } else if (path[i] == -1) {
-                    sum += orcs[MELEE_INDEX][i];
+                } else {
+                    sum += Math.max(orcs[MELEE_INDEX][i], orcs[RANGE_INDEX][i]);
                 }
             }
-            ///
-            values.put("" + leftBranch + '-' + rightBranch, sum);
+            if (sum > finalSum) {
+                finalSum = sum;
+            }
             return;
         }
 
-        // melee branch - left
-        for (int i = 0; i < melee; i++) {
-            for (int j = 0; j < path.length; j++) {
-                if (path[j] == 0) {
-                    path[j] = -1;
-                    leftBranch += j;
-                    calculate(melee - 1, range);
-                    path[j] = 0;
-                    leftBranch -= j;
+        // left - melee
+        if (lengthLeft > 0) {
+            for (int i = fromLeft; i <= path.length - lengthLeft; i++) {
+                if (path[i] == 0) {
+                    path[i] = -1;
+                    calculate1(i + 1, lengthLeft - 1, fromRight, lengthRight);
+                    path[i] = 0;
                 }
             }
         }
 
-        // range branch - right
-        for (int i = 0; i < range; i++) {
-            for (int j = 0; j < path.length; j++) {
-                if (path[j] == 0) {
-                    path[j] = 1;
-                    rightBranch += j;
-                    calculate(melee, range - 1);
-                    path[j] = 0;
-                    rightBranch -= j;
+        // right - range
+        if (lengthRight > 0) {
+            for (int i = fromRight; i <= path.length - lengthRight; i++) {
+                if (path[i] == 0) {
+                    path[i] = 1;
+                    calculate1(fromLeft, lengthLeft, i + 1, lengthRight - 1);
+                    path[i] = 0;
                 }
             }
         }
@@ -144,13 +130,11 @@ public class Main {
                 .toArray();
     }
 
-
     static class Army {
         private final int total;
         private final int grunts;
         private final int headHunters;
         private int[][] orks;
-
 
         Army(int total, int grunts, int headHunters) {
             this.total = total;

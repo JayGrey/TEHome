@@ -12,7 +12,7 @@ public class Permutation {
 
     public static void main(String[] args) {
         Permutation permutation = new Permutation(new int[]{1, 2, 3, 4, 5, 6});
-        permutation.run(0, 1, 0, 3);
+        permutation.run(0, 0, 0, 6);
     }
 
     private void print() {
