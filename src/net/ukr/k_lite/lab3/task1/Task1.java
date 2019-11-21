@@ -1,4 +1,4 @@
-package net.ukr.k_lite.lab3task1;
+package net.ukr.k_lite.lab3.task1;
 
 import net.ukr.k_lite.lab3.Task;
 
