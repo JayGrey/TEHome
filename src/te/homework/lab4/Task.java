@@ -1,0 +1,46 @@
+package te.homework.lab4;
+
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+
+public abstract class Task {
+
+    static int getNumberOfSteps(double from, double to, double step) {
+        return (int) Math.round((to - from) / step + 1);
+    }
+
+    public static double[] getX(double from, double to, double step) {
+        double[] result = new double[getNumberOfSteps(from, to, step)];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = from + step * i;
+        }
+        return result;
+    }
+
+    public double[] getY(double[] x) {
+        return DoubleStream.of(x).map(this::f).toArray();
+    }
+
+    public static int indexOfMaxElement(double[] arr) {
+        return IntStream.range(0, arr.length)
+                .reduce((i, j) -> arr[i] > arr[j] ? i : j)
+                .orElse(-1);
+    }
+
+    public static int indexOfMinElement(double[] arr) {
+        return IntStream.range(0, arr.length)
+                .reduce((i, j) -> arr[i] < arr[j] ? i : j)
+                .orElse(-1);
+    }
+
+    static double sum(double[] arr) {
+        return DoubleStream.of(arr).reduce((a, b) -> a + b).orElse(0);
+    }
+
+    static double average(double[] arr) {
+        return sum(arr) / arr.length;
+    }
+
+    public abstract double f(double x);
+}
