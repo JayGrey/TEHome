@@ -6,7 +6,7 @@ public class Task10 extends Task {
 
     private final double t;
 
-    public Task10(double t) {
+    Task10(double t) {
         this.t = t;
     }
 

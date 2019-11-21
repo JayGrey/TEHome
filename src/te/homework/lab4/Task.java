@@ -42,5 +42,13 @@ public abstract class Task {
         return sum(arr) / arr.length;
     }
 
+    public static void printMinAndMax(double[] x, double[] y) {
+        int indexMin = Task.indexOfMinElement(y);
+        int indexMax = Task.indexOfMaxElement(y);
+
+        System.out.format("min: i: %d, x: %f, f(x): %f%n", indexMin, x[indexMin], y[indexMin]);
+        System.out.format("max: i: %d, x: %f, f(x): %f%n", indexMax, x[indexMax], y[indexMax]);
+    }
+
     public abstract double f(double x);
 }

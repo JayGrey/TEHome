@@ -1,4 +1,4 @@
-package te.homework.lab4.task10;
+package te.homework.lab4.task1;
 
 import te.homework.lab4.Task;
 
@@ -7,13 +7,13 @@ public class Main {
 
 
     public static void main(String[] args) {
-        final double from = 0.2;
-        final double to = 2.0;
+        final double from = 0.0;
+        final double to = 3.0;
         final double step = 0.004;
 
-        Task10 task10 = new Task10(2.2);
+        Task task = new Task1(-0.5, 2.0);
         double[] x = Task.getX(from, to, step);
-        double[] y = task10.getY(x);
+        double[] y = task.getY(x);
 
         Task.printMinAndMax(x, y);
     }
