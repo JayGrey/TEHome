@@ -1,25 +1,15 @@
 package net.ukr.k_lite.lab3task3;
 
-public class Task3 {
+import net.ukr.k_lite.lab3.Task;
 
-    public String changeSubstring(String input) {
+class Task3 extends Task {
 
-        final int DIFF = 'О' - 'А';
-        char previousChar = input.charAt(0);
-        StringBuilder output = new StringBuilder(input.length());
-
-        for (char ch : input.toCharArray()) {
-            if (
-                    Character.toUpperCase(previousChar) == 'Р'
-                            && Character.toUpperCase(ch) == 'А'
-            ) {
-                output.append((char) (ch + DIFF));
-            } else {
-                output.append(ch);
-            }
-            previousChar = ch;
-        }
-
-        return output.toString();
+    String changeSubstring(String input) {
+        return onWordFind(str -> str
+                        .replace("ра", "ро")
+                        .replace("РА", "РО")
+                        .replace("Ра", "Ро")
+                        .replace("рА", "рО"),
+                input);
     }
 }

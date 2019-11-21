@@ -30,7 +30,7 @@ class Task1Test {
 
     @Test
     void replace3() {
-        Task1 task1 = new Task1(",");
+        Task1 task1 = new Task1(new char[]{','});
 
         String expected = "a2c,d2f,g2i";
 

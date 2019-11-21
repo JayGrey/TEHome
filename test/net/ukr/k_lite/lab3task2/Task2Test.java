@@ -1,11 +1,13 @@
 package net.ukr.k_lite.lab3task2;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("lab 3 task 2")
 class Task2Test {
     private Task2 task2;
 

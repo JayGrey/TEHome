@@ -1,40 +1,24 @@
 package net.ukr.k_lite.lab3task1;
 
-public class Task1 {
-    private String spaces;
+import net.ukr.k_lite.lab3.Task;
 
-    public Task1() {
-        this.spaces = " ";
+
+class Task1 extends Task {
+
+    Task1(char[] delimiters) {
+        super(delimiters);
     }
 
-    public Task1(String spaces) {
-        this.spaces = spaces;
+    Task1() {
+        super();
     }
 
-    public String replace(int index, char replaceChar, String input) {
-        StringBuilder output = new StringBuilder(input.length());
-
-        boolean inWord;
-        int wordIndex = 0;
-
-        for (char c: input.toCharArray()) {
-            if (spaces.contains("" + c)) {
-                inWord = false;
-                wordIndex = 0;
-            } else {
-                inWord = true;
-            }
-
-            if (inWord) {
-                wordIndex += 1;
-            }
-
-            if (inWord && wordIndex == index) {
-                output.append(replaceChar);
-            } else {
-                output.append(c);
-            }
-        }
-        return output.toString();
+    String replace(int wordLength, char replaceChar, String input) {
+        return onWordFind(
+                str -> wordLength > str.length()
+                        ? str
+                        : str.substring(0, wordLength - 1) + replaceChar + str.substring(wordLength),
+                input
+        );
     }
 }

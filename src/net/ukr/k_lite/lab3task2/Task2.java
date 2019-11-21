@@ -1,7 +1,9 @@
 package net.ukr.k_lite.lab3task2;
 
 
-public class Task2 {
+import net.ukr.k_lite.lab3.Task;
+
+class Task2 extends Task {
 
     int getCharPos(int ch) {
         final int EN_FIRST_UPPER = 0x41;
@@ -9,7 +11,7 @@ public class Task2 {
 
         if ((Character.toUpperCase(ch) >= EN_FIRST_UPPER)
                 && (Character.toUpperCase(ch) <= EN_LAST_UPPER)
-        ) {
+                ) {
             return Character.toUpperCase(ch) - EN_FIRST_UPPER + 1;
         }
 
@@ -18,7 +20,7 @@ public class Task2 {
 
         if ((Character.toUpperCase(ch) >= RU_FIRST_UPPER)
                 && (Character.toUpperCase(ch) <= RU_LAST_UPPER)
-        ) {
+                ) {
             return Character.toUpperCase(ch) - RU_FIRST_UPPER + 1;
         }
 
@@ -29,7 +31,4 @@ public class Task2 {
         return input.chars().map(this::getCharPos).toArray();
     }
 
-    public int[] process(String input) {
-        return new int[0];
-    }
 }
