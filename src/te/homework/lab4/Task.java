@@ -5,6 +5,9 @@ import java.util.stream.IntStream;
 
 public interface Task {
 
+    double EPSILON = 1e-8;
+
+
     static int getNumberOfSteps(double from, double to, double step) {
         return (int) Math.round((to - from) / step + 1);
     }
