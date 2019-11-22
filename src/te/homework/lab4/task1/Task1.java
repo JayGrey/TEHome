@@ -2,7 +2,7 @@ package te.homework.lab4.task1;
 
 import te.homework.lab4.Task;
 
-public class Task1 extends Task {
+public class Task1 implements Task {
 
     private final double a;
     private final double b;

@@ -15,7 +15,7 @@ public class Main {
         double[] x = Task.getX(from, to, step);
         double[] y = task.getY(x);
 
-        Task.printMinAndMax(x, y);
+        task.printMinAndMax(x, y);
     }
 
 

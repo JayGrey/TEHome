@@ -3,13 +3,13 @@ package te.homework.lab4;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
-public abstract class Task {
+public interface Task {
 
     static int getNumberOfSteps(double from, double to, double step) {
         return (int) Math.round((to - from) / step + 1);
     }
 
-    public static double[] getX(double from, double to, double step) {
+    static double[] getX(double from, double to, double step) {
         double[] result = new double[getNumberOfSteps(from, to, step)];
 
         for (int i = 0; i < result.length; i++) {
@@ -18,17 +18,13 @@ public abstract class Task {
         return result;
     }
 
-    public double[] getY(double[] x) {
-        return DoubleStream.of(x).map(this::f).toArray();
-    }
-
-    public static int indexOfMaxElement(double[] arr) {
+    static int indexOfMaxElement(double[] arr) {
         return IntStream.range(0, arr.length)
                 .reduce((i, j) -> arr[i] > arr[j] ? i : j)
                 .orElse(-1);
     }
 
-    public static int indexOfMinElement(double[] arr) {
+    static int indexOfMinElement(double[] arr) {
         return IntStream.range(0, arr.length)
                 .reduce((i, j) -> arr[i] < arr[j] ? i : j)
                 .orElse(-1);
@@ -42,13 +38,17 @@ public abstract class Task {
         return sum(arr) / arr.length;
     }
 
-    public static void printMinAndMax(double[] x, double[] y) {
-        int indexMin = Task.indexOfMinElement(y);
-        int indexMax = Task.indexOfMaxElement(y);
+    default double[] getY(double[] x) {
+        return DoubleStream.of(x).map(this::f).toArray();
+    }
+
+    default void printMinAndMax(double[] x, double[] y) {
+        int indexMin = indexOfMinElement(y);
+        int indexMax = indexOfMaxElement(y);
 
         System.out.format("min: i: %d, x: %f, f(x): %f%n", indexMin, x[indexMin], y[indexMin]);
         System.out.format("max: i: %d, x: %f, f(x): %f%n", indexMax, x[indexMax], y[indexMax]);
     }
 
-    public abstract double f(double x);
+    double f(double x);
 }

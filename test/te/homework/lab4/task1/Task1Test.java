@@ -1,6 +1,7 @@
 package te.homework.lab4.task1;
 
 import org.junit.jupiter.api.Test;
+import te.homework.lab4.Task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +10,7 @@ class Task1Test {
 
     @Test
     void f() {
-        Task1 task = new Task1(-0.5, 2);
+        Task task = new Task1(-0.5, 2);
 
         double[][] values = {
                 {0.7, 1.0}, // 175

@@ -11,11 +11,11 @@ public class Main {
         final double to = 2.0;
         final double step = 0.004;
 
-        Task10 task10 = new Task10(2.2);
+        Task task10 = new Task10(2.2);
         double[] x = Task.getX(from, to, step);
         double[] y = task10.getY(x);
 
-        Task.printMinAndMax(x, y);
+        task10.printMinAndMax(x, y);
     }
 
 
