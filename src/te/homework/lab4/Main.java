@@ -9,7 +9,8 @@ public class Main {
                 {0.8, 2.0, 0.005},
                 {0.0, 2.0, 0.002},
                 {0.7, 2.0, 0.005},
-//                {0.2, 2.8, 0.002},
+                {0.2, 2.8, 0.002},
+                {0.2, 2.0, 0.004},
         };
 
         Task[] functions = {
@@ -17,7 +18,7 @@ public class Main {
                 new Task2(1.5), // todo: where is p param ?
                 new Task3(2.8, -0.3, 4.0),
                 new Task4(1.65), // todo: where is p param ?
-//                new Task5(2.3),
+                new Task5(2.3),
         };
 
         for (int i = 0; i < functions.length; i++) {
