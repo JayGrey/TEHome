@@ -1,6 +1,5 @@
-package te.homework.lab4.task10;
+package te.homework.lab4;
 
-import te.homework.lab4.Task;
 
 public class Task10 implements Task {
 
@@ -12,7 +11,7 @@ public class Task10 implements Task {
 
     @Override
     public double f(double x) {
-        if (x <= 0.9) {
+        if (x <= (0.9 + EPSILON)) {
             return (Math.pow(Math.log(x), 3) + Math.pow(x, 2)) / Math.sqrt(x + t);
         } else {
             return Math.cos(x) + t * Math.pow(Math.sin(x), 2);

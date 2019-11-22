@@ -19,6 +19,7 @@ public class Main {
                 new Task3(2.8, -0.3, 4.0),
                 new Task4(1.65), // todo: where is p param ?
                 new Task5(2.3),
+                new Task10(2.2),
         };
 
         for (int i = 0; i < functions.length; i++) {
