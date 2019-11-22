@@ -1,6 +1,7 @@
 package te.homework.lab4;
 
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -10,6 +11,7 @@ public class Main {
                 {0.0, 2.0, 0.002},
                 {0.7, 2.0, 0.005},
                 {0.2, 2.8, 0.002},
+                {1.0, 5.0, 0.01},
                 {0.2, 2.0, 0.004},
         };
 
@@ -19,6 +21,7 @@ public class Main {
                 new Task3(2.8, -0.3, 4.0),
                 new Task4(1.65), // todo: where is p param ?
                 new Task5(2.3),
+                new Task6(2.4),
                 new Task10(2.2),
         };
 
