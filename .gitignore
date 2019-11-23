@@ -1,6 +1,7 @@
-lib
 .idea
+docs
+lib
 out
 *.iml
+*.txt
 
-/docs/
