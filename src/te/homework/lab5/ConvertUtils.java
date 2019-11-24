@@ -6,14 +6,14 @@ import java.util.stream.Stream;
 
 public interface ConvertUtils {
     static String doubleArrayToString(double[] arr) {
-        return DoubleStream.of(arr)
+        return arr == null ? "" : DoubleStream.of(arr)
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining(" "));
     }
 
     static double[] StringToDoubleArray(String input) {
         try {
-            return Stream.of(input.trim().split("\\s+"))
+            return input == null ? new double[0] : Stream.of(input.trim().split("\\s+"))
                     .mapToDouble(Double::parseDouble)
                     .toArray();
         } catch (NumberFormatException e) {

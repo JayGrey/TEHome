@@ -15,6 +15,7 @@ class ConvertUtilsTest {
         assertEquals("1.0 -2.0 3.0", ConvertUtils.doubleArrayToString(new double[]{1, -2, 3}));
         assertEquals("1.0 -2.0 0.3", ConvertUtils.doubleArrayToString(new double[]{1, -2, 0.3}));
         assertEquals("", ConvertUtils.doubleArrayToString(new double[]{}));
+        assertEquals("", ConvertUtils.doubleArrayToString(null));
     }
 
     @Test
@@ -28,5 +29,7 @@ class ConvertUtilsTest {
 
         assertArrayEquals(new double[]{1.0, -2.0, 0.3}, ConvertUtils.StringToDoubleArray("1.0 -2.0 0.3"),
                 EPSILON);
+
+        assertEquals(0, ConvertUtils.StringToDoubleArray(null).length);
     }
 }
