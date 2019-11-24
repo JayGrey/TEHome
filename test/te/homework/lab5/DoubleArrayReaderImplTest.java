@@ -93,7 +93,7 @@ class DoubleArrayReaderImplTest {
     private void prepareFile(Path file, double[] values) {
         String[] data = {
                 String.valueOf(values.length),
-                Utils.doubleArrayToString(values),
+                ConvertUtils.doubleArrayToString(values),
         };
 
         prepareFile(file, data);
@@ -103,7 +103,7 @@ class DoubleArrayReaderImplTest {
         String[] strings = Stream.concat(
                 Stream.of(String.valueOf(values[0].length)),
                 Stream.of(values)
-                        .map(Utils::doubleArrayToString))
+                        .map(ConvertUtils::doubleArrayToString))
                 .toArray(String[]::new);
 
         prepareFile(file, strings);

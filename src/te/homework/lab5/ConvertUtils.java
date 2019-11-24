@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
-public interface Utils {
+public interface ConvertUtils {
     static String doubleArrayToString(double[] arr) {
         return DoubleStream.of(arr)
                 .mapToObj(String::valueOf)

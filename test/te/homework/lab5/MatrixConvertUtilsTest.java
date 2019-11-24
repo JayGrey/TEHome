@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static te.homework.lab5.MatrixUtils.Figure.*;
 
-class MatrixUtilsTest {
+class MatrixConvertUtilsTest {
     private final static double EPSILON = 1e-8;
 
     private final double[][] matrix = {

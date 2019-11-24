@@ -12,7 +12,7 @@ public class DoubleArrayReaderImpl implements DoubleArrayReader {
             // skip first line with number of elements
             reader.readLine();
 
-            return Utils.StringToDoubleArray(reader.readLine());
+            return ConvertUtils.StringToDoubleArray(reader.readLine());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             return new double[0];
@@ -32,7 +32,7 @@ public class DoubleArrayReaderImpl implements DoubleArrayReader {
             double[][] result = new double[numRows][];
 
             for (int i = 0; i < numRows; i++) {
-                result[i] = Utils.StringToDoubleArray(reader.readLine());
+                result[i] = ConvertUtils.StringToDoubleArray(reader.readLine());
 
                 if (result[i].length != numRows) {
                     System.err.format("line %d has %d elements, but %d expected%n", i + 1,
