@@ -10,7 +10,7 @@ public class Main {
         double[] lab51Array = reader.readOneDimensionalArray("lab51.txt");
         double[][] lab52Array = reader.readTwoDimensionalArray("lab52.txt");
 
-        Stream.of(new Task1(), new Task2(), new Task3()).forEach(t -> {
+        Stream.of(new Task1(), new Task2(), new Task3(), new Task4()).forEach(t -> {
             System.out.format("========== [ %s ] ==========%n", t.getClass().getSimpleName());
             t.processArray(lab51Array);
             t.processArray(lab52Array);
