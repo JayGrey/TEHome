@@ -2,10 +2,13 @@ package te.homework.lab5;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.DoubleStream;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static te.homework.lab5.MatrixUtils.Figure.*;
 
-class MatrixConvertUtilsTest {
+class MatrixUtilsTest {
     private final static double EPSILON = 1e-8;
 
     private final double[][] matrix = {
@@ -149,5 +152,18 @@ class MatrixConvertUtilsTest {
     void testOutOfBoundaries() {
         double[] actual = MatrixUtils.cutFigure(1, 3, 1, 3, LOWER_LEFT, matrix);
         assertArrayEquals(new double[0], actual, EPSILON);
+    }
+
+    @Test
+    void cutFigureAndReturnStream() {
+        double[] expected = new double[]{5, 8, 9};
+        DoubleStream actual = MatrixUtils.cutFigureAndReturnStream(1, 2, 1, 2, LOWER_LEFT, matrix);
+        assertArrayEquals(expected, actual.toArray(), EPSILON);
+
+        actual = MatrixUtils.cutFigureAndReturnStream(1, 2, 1, 2, LOWER_LEFT, null);
+        assertEquals(0, actual.count());
+
+        actual = MatrixUtils.cutFigureAndReturnStream(1, 2, 1, 2, LOWER_LEFT, new double[0][]);
+        assertEquals(0, actual.count());
     }
 }
