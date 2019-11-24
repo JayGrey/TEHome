@@ -17,5 +17,6 @@ public class Main {
 
         // Task1
         prettyPrint("task 5.1", new Task1ArrayProcessor(), lab51Array, lab52Array);
+        prettyPrint("task 5.2", new Task2ArrayProcessor(), lab51Array, lab52Array);
     }
 }
