@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("lab 5.2 tests")
-class Task2ArrayProcessorTest {
+class Task2Test {
     private static final double EPSILON = 1e-8;
 
     @Test
     void calculate() {
-        ArrayProcessor processor = new Task2ArrayProcessor();
+        Task processor = new Task2();
         assertEquals(24.0, processor.calculate(new double[]{1.0, 2.0, 3.0, 4.0}), EPSILON);
         assertEquals(-1.0, processor.calculate(new double[]{1.0, -1.0}), EPSILON);
-        assertEquals(0.0, processor.calculate(new double[0]), EPSILON);
-        assertEquals(0.0, processor.calculate((double[]) null), EPSILON);
+        assertEquals(Double.NaN, processor.calculate(new double[0]), EPSILON);
+        assertEquals(Double.NaN, processor.calculate((double[]) null), EPSILON);
     }
 
     @Test
@@ -26,9 +26,9 @@ class Task2ArrayProcessorTest {
                 {0.0, 5.0, 3.0, 0.0},
                 {0.2, 9.0, 0.4, 0.0},
         };
-        ArrayProcessor processor = new Task2ArrayProcessor();
+        ArrayProcessor processor = new Task2();
 
         assertEquals(9.0, processor.calculate(matrix), EPSILON);
-        assertEquals(Double.NEGATIVE_INFINITY, processor.calculate((double[][]) null), EPSILON);
+        assertEquals(Double.NaN, processor.calculate((double[][]) null), EPSILON);
     }
 }
