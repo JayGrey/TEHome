@@ -13,7 +13,7 @@ public class Main {
         Stream.of(
                 new Task1(), new Task2(),
                 new Task3(), new Task4(),
-                new Task5()
+                new Task5(), new Task6()
         ).forEach(t -> {
             System.out.format("========== [ %s ] ==========%n", t.getClass().getSimpleName());
             t.processArray(lab51Array);
