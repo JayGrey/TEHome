@@ -10,4 +10,14 @@ public abstract class Task implements ArrayProcessor {
     public void processArray(double[][] array) {
         System.out.format("2: %f %n", calculate(array));
     }
+
+    @Override
+    public double calculate(double[] array) {
+        return Double.NaN;
+    }
+
+    @Override
+    public double calculate(double[][] array) {
+        return Double.NaN;
+    }
 }
