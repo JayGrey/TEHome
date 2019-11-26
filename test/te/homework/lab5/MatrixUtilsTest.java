@@ -148,6 +148,21 @@ class MatrixUtilsTest {
         assertArrayEquals(expected, actual, EPSILON);
     }
 
+    // Rectangle
+    @Test
+    void cutFigureRectangleElement() {
+        double[] expected = {6, 10};
+        double[][] matrix = {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16},
+        };
+
+        assertArrayEquals(expected, MatrixUtils.cutFigure(1, 2, 1, 1, RECTANGLE, matrix), EPSILON);
+
+    }
+
     @Test
     void testOutOfBoundaries() {
         double[] actual = MatrixUtils.cutFigure(1, 3, 1, 3, LOWER_LEFT, matrix);

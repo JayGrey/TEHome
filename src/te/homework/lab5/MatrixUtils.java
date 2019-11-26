@@ -92,28 +92,55 @@ class MatrixUtils {
         return result;
     }
 
+    private static double[] rectangle(
+            final int fromRow, final int toRow,
+            final int fromColumn, final int toColumn,
+            double[][] input
+    ) {
+        double[] result = new double[(toRow - fromRow + 1) * (toColumn - fromColumn + 1)];
+        int arrayIndex = 0;
+
+        for (int i = fromRow; i <= toRow; i++) {
+            for (int j = fromColumn; j <= toColumn; j++) {
+                result[arrayIndex] = input[i][j];
+                arrayIndex += 1;
+            }
+        }
+
+        return result;
+    }
+
     static double[] cutFigure(int fromRow, int toRow, int fromColumn, int toColumn, Figure figure
             , double[][] input) {
 
-        if (!checkBoundaries(fromRow, toRow, fromColumn, toColumn, input)) {
-            return new double[0];
-        }
 
         switch (figure) {
             case UPPER_LEFT: {
-                return upperLeftTriangle(fromRow, toRow, fromColumn, toColumn, input);
+                return checkBoundaries(fromRow, toRow, fromColumn, toColumn, input) ?
+                        upperLeftTriangle(fromRow, toRow, fromColumn, toColumn, input)
+                        : new double[0];
             }
 
             case UPPER_RIGHT: {
-                return upperRightTriangle(fromRow, toRow, fromColumn, toColumn, input);
+                return checkBoundaries(fromRow, toRow, fromColumn, toColumn, input) ?
+                        upperRightTriangle(fromRow, toRow, fromColumn, toColumn, input) :
+                        new double[0];
             }
 
             case LOWER_RIGHT: {
-                return lowerRightTriangle(fromRow, toRow, fromColumn, toColumn, input);
+                return checkBoundaries(fromRow, toRow, fromColumn, toColumn, input) ?
+                        lowerRightTriangle(fromRow, toRow, fromColumn, toColumn, input) :
+                        new double[0];
             }
 
             case LOWER_LEFT: {
-                return lowerLeftTriangle(fromRow, toRow, fromColumn, toColumn, input);
+                return checkBoundaries(fromRow, toRow, fromColumn, toColumn, input) ?
+                        lowerLeftTriangle(fromRow, toRow, fromColumn, toColumn, input) :
+                        new double[0];
+            }
+
+            case RECTANGLE: {
+                return rectangle(fromRow, toRow, fromColumn, toColumn, input);
             }
 
             default: {
@@ -129,5 +156,5 @@ class MatrixUtils {
         return Arrays.stream(cutFigure(fromRow, toRow, fromColumn, toColumn, figure, input));
     }
 
-    enum Figure {UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT}
+    enum Figure {UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT, RECTANGLE}
 }
