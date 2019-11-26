@@ -1,9 +1,11 @@
 package te.homework.lab5;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("lab 5.6 tests")
 class Task6Test {
     private final static double EPSILON = 1e-8;
 

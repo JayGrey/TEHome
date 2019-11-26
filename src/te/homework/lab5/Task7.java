@@ -32,20 +32,20 @@ class Task7 extends Task {
 
         int split = array.length / 2;
 
-        DoubleStream upperTriangle = MatrixUtils.cutFigureAndReturnStream(
-                0, split,
-                0, split,
+        DoubleStream leftTriangle = MatrixUtils.cutFigureAndReturnStream(
+                0, split - 1,
+                0, split - 1,
                 UPPER_RIGHT, array
         );
 
-        DoubleStream lowerTriangle = MatrixUtils.cutFigureAndReturnStream(
-                0, split - 1,
-                array.length - split, array.length - 1,
+        DoubleStream rightTriangle = MatrixUtils.cutFigureAndReturnStream(
+                0, array.length - split - 1,
+                split, array.length - 1,
                 UPPER_LEFT, array
         );
 
         DoubleSummaryStatistics result = DoubleStream
-                .concat(upperTriangle, lowerTriangle)
+                .concat(leftTriangle, rightTriangle)
                 .filter(a -> Math.abs(a) < 100.0).summaryStatistics();
 
         return result.getCount() > 0 ? result.getSum() : Double.NaN;
