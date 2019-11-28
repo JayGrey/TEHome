@@ -1,9 +1,6 @@
 package te.homework.task4;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Triangle {
     private static final double EPSILON = 1E-8;
@@ -83,7 +80,7 @@ public class Triangle {
             result.add(Type.ARBITRARY);
         }
 
-        return result;
+        return Collections.unmodifiableSet(result);
     }
 
     @Override

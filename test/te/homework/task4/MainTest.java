@@ -154,9 +154,18 @@ class MainTest {
 
         //
         map = Main.sortByType(Arrays.asList(
-                new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)),
-                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
-                new Triangle(Point.of(5, 2), Point.of(7, 2), Point.of(6, 6))
+                new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)), // equa
+                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)), //right
+                new Triangle(Point.of(5, 2), Point.of(7, 2), Point.of(6, 6)),  // iso
+                new Triangle(Point.of(9, 1), Point.of(12, 1), Point.of(11, 4)), // ar
+                new Triangle(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4)) // right iso
         ));
+
+        assertEquals(4, map.size());
+        assertEquals(1, map.get(Triangle.Type.EQUILATERAL).size());
+        assertEquals(2, map.get(Triangle.Type.RIGHT).size());
+        assertEquals(3, map.get(Triangle.Type.ISOSCELES).size());
+        assertEquals(1, map.get(Triangle.Type.ARBITRARY).size());
+
     }
 }

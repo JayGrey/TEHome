@@ -73,4 +73,16 @@ class TriangleTest {
 
     }
 
+    @Test
+    void typeModify() {
+        Triangle triangle = new Triangle(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4));
+        assertEquals(2, triangle.type.size());
+        try {
+            triangle.type.add(Triangle.Type.ARBITRARY);
+            fail();
+        } catch (UnsupportedOperationException ignored) {
+
+        }
+    }
+
 }
