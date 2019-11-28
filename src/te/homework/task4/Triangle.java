@@ -80,7 +80,7 @@ public class Triangle {
             result.add(Type.ARBITRARY);
         }
 
-        return Collections.unmodifiableSet(result);
+        return Collections.unmodifiableSet(EnumSet.copyOf(result));
     }
 
     @Override
