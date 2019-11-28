@@ -1,6 +1,7 @@
 package te.homework.task4;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Triangle {
     private static final double EPSILON = 1E-8;
@@ -76,6 +77,21 @@ public class Triangle {
     @Override
     public String toString() {
         return String.format("Triangle[%f %f %f]", a.distance(b), b.distance(c), c.distance(a));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return a.equals(triangle.a) &&
+                b.equals(triangle.b) &&
+                c.equals(triangle.c);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b, c);
     }
 
     enum Type {EQUILATERAL, ISOSCELES, RIGHT, ARBITRARY}

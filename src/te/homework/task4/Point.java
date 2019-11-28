@@ -3,8 +3,10 @@ package te.homework.task4;
 import java.util.Objects;
 
 public class Point {
-    public final double x;
-    public final double y;
+    private static final double EPSILON = 1E-8;
+
+    final double x;
+    final double y;
 
     private Point(double x, double y) {
         this.x = x;
@@ -37,8 +39,8 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return Double.compare(point.x, x) == 0 &&
-                Double.compare(point.y, y) == 0;
+        return Math.abs(x - point.x) < EPSILON &&
+                Math.abs(y - point.y) < EPSILON;
     }
 
     @Override
