@@ -12,46 +12,75 @@ import java.util.*;
 
 * */
 public class Main {
-    private static Triangle findMinBySquare(List<Triangle> list) {
+    static Triangle findTriangleWithMinSquare(List<Triangle> list) {
+        if (list == null || list.size() == 0) {
+            throw new IllegalArgumentException("list must not be null");
+        }
+
         return Collections.min(list, Comparator.comparingDouble(t -> t.square));
     }
 
-    private static Triangle findMaxBySquare(List<Triangle> list) {
+    static Triangle findTriangleWithMaxSquare(List<Triangle> list) {
+        if (list == null || list.size() == 0) {
+            throw new IllegalArgumentException("list must not be null");
+        }
+
         return Collections.max(list, Comparator.comparingDouble(t -> t.square));
     }
 
-    static Triangle findMinByPerimeter(List<Triangle> list) {
+    static Triangle findTriangleWithMinPerimeter(List<Triangle> list) {
+        if (list == null || list.size() == 0) {
+            throw new IllegalArgumentException("list must not be null");
+        }
+
         return Collections.min(list, Comparator.comparingDouble(t -> t.perimeter));
     }
 
-    static Triangle findMaxByPerimeter(List<Triangle> list) {
+    static Triangle findTriangleWithMaxPerimeter(List<Triangle> list) {
+        if (list == null || list.size() == 0) {
+            throw new IllegalArgumentException("list must not be null");
+        }
+
         return Collections.max(list, Comparator.comparingDouble(t -> t.perimeter));
     }
 
+    static Map<Triangle.Type, List<Triangle>> sortByType(List<Triangle> triangles) {
+
+        if (triangles == null) {
+            throw new IllegalArgumentException("list must not be null");
+        }
+
+        Map<Triangle.Type, List<Triangle>> result = new HashMap<>();
+
+        for (Triangle triangle : triangles) {
+            for (Triangle.Type t : Triangle.Type.values()) {
+                if (triangle.type.contains(t)) {
+                    List<Triangle> list = result.getOrDefault(t, new ArrayList<>());
+                    list.add(triangle);
+                    result.put(t, list);
+                }
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
-        Triangle[] triangles = new Triangle[]{
+        List<Triangle> triangles = Arrays.asList(
                 new Triangle(Point.of(1, 2), Point.of(5, 2), Point.of(1, 6)),
                 new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 5)),
                 new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 4)),
                 new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)),
-                new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0)),
-        };
+                new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0))
+        );
 
-        Map<Triangle.Type, List<Triangle>> sortedByType = new HashMap<>();
-
-        for (Triangle triangle : triangles) {
-            List<Triangle> list = sortedByType.getOrDefault(triangle.type, new ArrayList<>());
-            list.add(triangle);
-            sortedByType.put(triangle.type, list);
-        }
-
-        sortedByType.forEach((t, l) -> {
+        sortByType(triangles).forEach((t, l) -> {
             System.out.format("type: %s%n", t.toString());
             System.out.format("total: %d%n", l.size());
-            System.out.format("square min: %.5f%n", findMinBySquare(l).square);
-            System.out.format("square max: %.5f%n", findMaxBySquare(l).square);
-            System.out.format("perimeter min: %.5f%n", findMinByPerimeter(l).perimeter);
-            System.out.format("perimeter max: %.5f%n%n", findMaxByPerimeter(l).perimeter);
+            System.out.format("square min: %.5f%n", findTriangleWithMinSquare(l).square);
+            System.out.format("square max: %.5f%n", findTriangleWithMaxSquare(l).square);
+            System.out.format("perimeter min: %.5f%n", findTriangleWithMinPerimeter(l).perimeter);
+            System.out.format("perimeter max: %.5f%n%n", findTriangleWithMaxPerimeter(l).perimeter);
         });
     }
 }

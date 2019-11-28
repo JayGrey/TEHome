@@ -2,7 +2,7 @@ package te.homework.task4;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest {
     private static final double EPSILON = 1e-8;
@@ -37,45 +37,40 @@ class TriangleTest {
     @Test
     void getType() {
         Triangle triangle1 = new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 5));
-        assertEquals(Triangle.Type.RIGHT, triangle1.type);
+        assertEquals(1, triangle1.type.size());
+        assertTrue(triangle1.type.contains(Triangle.Type.RIGHT));
 
         Triangle triangle2 = new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 4));
-        assertEquals(Triangle.Type.ISOSCELES, triangle2.type);
+        assertEquals(2, triangle2.type.size());
+        assertTrue(triangle2.type.contains(Triangle.Type.RIGHT));
+        assertTrue(triangle2.type.contains(Triangle.Type.ISOSCELES));
+
 
         Triangle triangle3 = new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423));
-        assertEquals(Triangle.Type.EQUILATERAL, triangle3.type);
+        assertEquals(2, triangle3.type.size());
+        assertTrue(triangle3.type.contains(Triangle.Type.EQUILATERAL));
+        assertTrue(triangle3.type.contains(Triangle.Type.ISOSCELES));
+
 
         Triangle triangle4 = new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0));
-        assertEquals(Triangle.Type.ARBITRARY, triangle4.type);
+        assertEquals(1, triangle4.type.size());
+        assertTrue(triangle4.type.contains(Triangle.Type.ARBITRARY));
 
-    }
-
-   /* @Test
-    void isEquilateral() {
-        Triangle triangle = new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423));
-        assertTrue(triangle.isEquilateral());
-
-        Triangle triangle1 = new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0));
-        assertFalse(triangle1.isEquilateral());
+        Triangle triangle5 = new Triangle(Point.of(5, 2), Point.of(7, 2), Point.of(6, 6));
+        assertEquals(1, triangle5.type.size());
+        assertTrue(triangle5.type.contains(Triangle.Type.ISOSCELES));
 
     }
 
     @Test
-    void isIsosceles() {
-        Triangle triangle1 = new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 4));
-        assertTrue(triangle1.isIsosceles());
+    void equals() {
+        Triangle triangle1 = new Triangle(Point.of(1, 2), Point.of(3, 4), Point.of(3, 1));
+        Triangle triangle2 = new Triangle(Point.of(2, 2), Point.of(3, 4), Point.of(3, 1));
+        Triangle triangle3 = new Triangle(Point.of(1 + 2e-9, 2), Point.of(3, 4), Point.of(3, 1));
 
-        Triangle triangle2 = new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0));
-        assertFalse(triangle2.isIsosceles());
+        assertNotEquals(triangle1, triangle2);
+        assertEquals(triangle1, triangle3);
+
     }
-
-    @Test
-    void isRight() {
-        Triangle triangle1 = new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 5));
-        assertTrue(triangle1.isRight());
-
-        Triangle triangle2 = new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0));
-        assertFalse(triangle2.isRight());
-    }*/
 
 }

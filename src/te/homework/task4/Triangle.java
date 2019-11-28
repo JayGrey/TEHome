@@ -1,7 +1,9 @@
 package te.homework.task4;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Triangle {
     private static final double EPSILON = 1E-8;
@@ -12,7 +14,7 @@ public class Triangle {
 
     final double square;
     final double perimeter;
-    final Type type;
+    final Set<Type> type;
 
     Triangle(Point a, Point b, Point c) {
         this.a = a;
@@ -62,27 +64,38 @@ public class Triangle {
         return Math.pow(sides[0], 2) + Math.pow(sides[1], 2) - Math.pow(sides[2], 2) < EPSILON;
     }
 
-    private Type getType() {
-        if (isEquilateral()) {
-            return Type.EQUILATERAL;
-        } else if (isIsosceles()) {
-            return Type.ISOSCELES;
-        } else if (isRight()) {
-            return Type.RIGHT;
-        } else {
-            return Type.ARBITRARY;
-        }
-    }
+    private Set<Type> getType() {
+        Set<Type> result = new HashSet<>();
 
-    @Override
-    public String toString() {
-        return String.format("Triangle[%f %f %f]", a.distance(b), b.distance(c), c.distance(a));
+        if (isEquilateral()) {
+            result.add(Type.EQUILATERAL);
+        }
+
+        if (isIsosceles()) {
+            result.add(Type.ISOSCELES);
+        }
+
+        if (isRight()) {
+            result.add(Type.RIGHT);
+        }
+
+        if (result.isEmpty()) {
+            result.add(Type.ARBITRARY);
+        }
+
+        return result;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         Triangle triangle = (Triangle) o;
         return a.equals(triangle.a) &&
                 b.equals(triangle.b) &&
