@@ -1,6 +1,13 @@
 package te.homework.task4;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -109,4 +116,49 @@ class TriangleTest {
         }
     }
 
+    @Test
+    void loadFrom(@TempDir Path tempDir) {
+        Path file = tempDir.resolve("triangles.txt");
+        prepareFile(file, new String[]{
+                " 1 2 5.0 2 -11 6.45",
+        });
+        List<Triangle> triangles = Triangles.loadFrom(file.toString());
+        assertEquals(1, triangles.size());
+        assertEquals(Point.of(1, 2), triangles.get(0).a);
+        assertEquals(Point.of(5, 2), triangles.get(0).b);
+        assertEquals(Point.of(-11, 6.45), triangles.get(0).c);
+    }
+
+    @Test
+    void loadFromMultiplyLines(@TempDir Path tempDir) {
+        Path file = tempDir.resolve("triangles.txt");
+        prepareFile(file, new String[]{
+                " 1 2 5.0 2 -11 6.45",
+                " 1 2 5.0 2 -11 6.45",
+                " 1 2 5.0 2 -11 6.45",
+                "ada da a",
+                " 1 2 5.0 2 -11",
+                "",
+                "1 2 5.0   2   -11 7.12",
+                ""
+
+        });
+        List<Triangle> triangles = Triangles.loadFrom(file.toString());
+        assertEquals(4, triangles.size());
+    }
+
+    @Test
+    void loadFromNonExistingFile() {
+        List<Triangle> triangles = Triangles.loadFrom("non existing file");
+        assertEquals(0, triangles.size());
+    }
+
+    private void prepareFile(Path filename, String[] lines) {
+        try {
+            Files.write(filename, Arrays.asList(lines));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

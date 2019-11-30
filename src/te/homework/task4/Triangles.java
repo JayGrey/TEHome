@@ -1,6 +1,10 @@
 package te.homework.task4;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public interface Triangles {
     static Triangle findTriangleWithMinSquare(List<Triangle> list) {
@@ -54,5 +58,30 @@ public interface Triangles {
         }
 
         return result;
+    }
+
+    static Optional<Triangle> stringToTriangle(String string) {
+        try {
+            String[] coords = string.trim().split("\\s+");
+            return Optional.of(Triangle.of(
+                    Point.of(Double.parseDouble(coords[0]), Double.parseDouble(coords[1])),
+                    Point.of(Double.parseDouble(coords[2]), Double.parseDouble(coords[3])),
+                    Point.of(Double.parseDouble(coords[4]), Double.parseDouble(coords[5]))
+            ));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    static List<Triangle> loadFrom(String filename) {
+        try {
+            return Files.lines(Paths.get(filename))
+                    .map(Triangles::stringToTriangle)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return Collections.emptyList();
+        }
     }
 }
