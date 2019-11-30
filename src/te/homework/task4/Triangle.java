@@ -25,7 +25,7 @@ public class Triangle {
 
     static Triangle of(Point a, Point b, Point c) {
         if (a == null || b == null || c == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("points must not be null");
         }
         return new Triangle(a, b, c);
     }

@@ -8,6 +8,30 @@ class TriangleTest {
     private static final double EPSILON = 1e-8;
 
     @Test
+    void of() {
+        try {
+            Triangle.of(null, Point.of(1, 1), Point.of(2, 2));
+            fail();
+        } catch (IllegalArgumentException ignored) {
+
+        }
+
+        try {
+            Triangle.of(Point.of(1, 1), null, Point.of(2, 2));
+            fail();
+        } catch (IllegalArgumentException ignored) {
+
+        }
+
+        try {
+            Triangle.of(Point.of(1, 1), Point.of(2, 2), null);
+            fail();
+        } catch (IllegalArgumentException ignored) {
+        }
+
+    }
+
+    @Test
     void getSquare() {
         Triangle triangle = Triangle.of(Point.of(1, 2), Point.of(5, 2), Point.of(1, 6));
         assertEquals(8, triangle.square, EPSILON);

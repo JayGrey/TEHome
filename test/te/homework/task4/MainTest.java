@@ -22,17 +22,17 @@ class MainTest {
         Triangle expected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
         Triangle notExpected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
-        assertEquals(expected, Main.findTriangleWithMinSquare(list));
-        assertNotEquals(notExpected, Main.findTriangleWithMinSquare(list));
+        assertEquals(expected, Triangles.findTriangleWithMinSquare(list));
+        assertNotEquals(notExpected, Triangles.findTriangleWithMinSquare(list));
 
         try {
-            Main.findTriangleWithMinSquare(null);
+            Triangles.findTriangleWithMinSquare(null);
             fail();
         } catch (IllegalArgumentException ignored) {
         }
 
         try {
-            Main.findTriangleWithMinSquare(Collections.emptyList());
+            Triangles.findTriangleWithMinSquare(Collections.emptyList());
             fail();
         } catch (IllegalArgumentException ignored) {
         }
@@ -49,17 +49,17 @@ class MainTest {
         Triangle notExpected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
         Triangle expected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
-        assertEquals(expected, Main.findTriangleWithMaxSquare(list));
-        assertNotEquals(notExpected, Main.findTriangleWithMaxSquare(list));
+        assertEquals(expected, Triangles.findTriangleWithMaxSquare(list));
+        assertNotEquals(notExpected, Triangles.findTriangleWithMaxSquare(list));
 
         try {
-            Main.findTriangleWithMaxSquare(null);
+            Triangles.findTriangleWithMaxSquare(null);
             fail();
         } catch (IllegalArgumentException ignored) {
         }
 
         try {
-            Main.findTriangleWithMaxSquare(Collections.emptyList());
+            Triangles.findTriangleWithMaxSquare(Collections.emptyList());
             fail();
         } catch (IllegalArgumentException ignored) {
         }
@@ -76,17 +76,17 @@ class MainTest {
         Triangle expected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
         Triangle notExpected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
-        assertEquals(expected, Main.findTriangleWithMinPerimeter(list));
-        assertNotEquals(notExpected, Main.findTriangleWithMinPerimeter(list));
+        assertEquals(expected, Triangles.findTriangleWithMinPerimeter(list));
+        assertNotEquals(notExpected, Triangles.findTriangleWithMinPerimeter(list));
 
         try {
-            Main.findTriangleWithMinPerimeter(null);
+            Triangles.findTriangleWithMinPerimeter(null);
             fail();
         } catch (IllegalArgumentException ignored) {
         }
 
         try {
-            Main.findTriangleWithMinPerimeter(Collections.emptyList());
+            Triangles.findTriangleWithMinPerimeter(Collections.emptyList());
             fail();
         } catch (IllegalArgumentException ignored) {
         }
@@ -103,17 +103,17 @@ class MainTest {
         Triangle notExpected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
         Triangle expected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
-        assertEquals(expected, Main.findTriangleWithMaxPerimeter(list));
-        assertNotEquals(notExpected, Main.findTriangleWithMaxPerimeter(list));
+        assertEquals(expected, Triangles.findTriangleWithMaxPerimeter(list));
+        assertNotEquals(notExpected, Triangles.findTriangleWithMaxPerimeter(list));
 
         try {
-            Main.findTriangleWithMaxPerimeter(null);
+            Triangles.findTriangleWithMaxPerimeter(null);
             fail();
         } catch (IllegalArgumentException ignored) {
         }
 
         try {
-            Main.findTriangleWithMaxPerimeter(Collections.emptyList());
+            Triangles.findTriangleWithMaxPerimeter(Collections.emptyList());
             fail();
         } catch (IllegalArgumentException ignored) {
         }
@@ -121,7 +121,7 @@ class MainTest {
 
     @Test
     void sortByType() {
-        Map<Triangle.Type, List<Triangle>> map = Main.sortByType(
+        Map<Triangle.Type, List<Triangle>> map = Triangles.sortByType(
                 Arrays.asList(
                         Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
                         Triangle.of(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)))
@@ -131,7 +131,7 @@ class MainTest {
         assertEquals(2, map.get(Triangle.Type.RIGHT).size());
 
         //
-        map = Main.sortByType(
+        map = Triangles.sortByType(
                 Arrays.asList(
                         Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
                         Triangle.of(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4)))
@@ -143,17 +143,17 @@ class MainTest {
 
         //
         try {
-            Main.sortByType(null);
+            Triangles.sortByType(null);
             fail();
         } catch (IllegalArgumentException ignored) {
         }
 
         //
-        map = Main.sortByType(Collections.emptyList());
+        map = Triangles.sortByType(Collections.emptyList());
         assertEquals(0, map.size());
 
         //
-        map = Main.sortByType(Arrays.asList(
+        map = Triangles.sortByType(Arrays.asList(
                 Triangle.of(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)), // equa
                 Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)), //right
                 Triangle.of(Point.of(5, 2), Point.of(7, 2), Point.of(6, 6)),  // iso
