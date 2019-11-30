@@ -14,13 +14,13 @@ class MainTest {
     @Test
     void findMinBySquare() {
         List<Triangle> list = Arrays.asList(
-                new Triangle(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
-                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
-                new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7))
+                Triangle.of(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
+                Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
+                Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7))
         );
 
-        Triangle expected = new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
-        Triangle notExpected = new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
+        Triangle expected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
+        Triangle notExpected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
         assertEquals(expected, Main.findTriangleWithMinSquare(list));
         assertNotEquals(notExpected, Main.findTriangleWithMinSquare(list));
@@ -41,13 +41,13 @@ class MainTest {
     @Test
     void findMaxBySquare() {
         List<Triangle> list = Arrays.asList(
-                new Triangle(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
-                new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7)),
-                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4))
+                Triangle.of(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
+                Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7)),
+                Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4))
         );
 
-        Triangle notExpected = new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
-        Triangle expected = new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
+        Triangle notExpected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
+        Triangle expected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
         assertEquals(expected, Main.findTriangleWithMaxSquare(list));
         assertNotEquals(notExpected, Main.findTriangleWithMaxSquare(list));
@@ -68,13 +68,13 @@ class MainTest {
     @Test
     void findMinByPerimeter() {
         List<Triangle> list = Arrays.asList(
-                new Triangle(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
-                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
-                new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7))
+                Triangle.of(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
+                Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
+                Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7))
         );
 
-        Triangle expected = new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
-        Triangle notExpected = new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
+        Triangle expected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
+        Triangle notExpected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
         assertEquals(expected, Main.findTriangleWithMinPerimeter(list));
         assertNotEquals(notExpected, Main.findTriangleWithMinPerimeter(list));
@@ -95,13 +95,13 @@ class MainTest {
     @Test
     void findMaxByPerimeter() {
         List<Triangle> list = Arrays.asList(
-                new Triangle(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
-                new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7)),
-                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4))
+                Triangle.of(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)),
+                Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7)),
+                Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4))
         );
 
-        Triangle notExpected = new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
-        Triangle expected = new Triangle(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
+        Triangle notExpected = Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4));
+        Triangle expected = Triangle.of(Point.of(9, 1), Point.of(13, 1), Point.of(9, 7));
 
         assertEquals(expected, Main.findTriangleWithMaxPerimeter(list));
         assertNotEquals(notExpected, Main.findTriangleWithMaxPerimeter(list));
@@ -123,8 +123,8 @@ class MainTest {
     void sortByType() {
         Map<Triangle.Type, List<Triangle>> map = Main.sortByType(
                 Arrays.asList(
-                        new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
-                        new Triangle(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)))
+                        Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
+                        Triangle.of(Point.of(4, 1), Point.of(7, 1), Point.of(4, 5)))
         );
 
         assertEquals(1, map.size());
@@ -133,8 +133,8 @@ class MainTest {
         //
         map = Main.sortByType(
                 Arrays.asList(
-                        new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
-                        new Triangle(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4)))
+                        Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)),
+                        Triangle.of(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4)))
         );
 
         assertEquals(2, map.size());
@@ -154,11 +154,11 @@ class MainTest {
 
         //
         map = Main.sortByType(Arrays.asList(
-                new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)), // equa
-                new Triangle(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)), //right
-                new Triangle(Point.of(5, 2), Point.of(7, 2), Point.of(6, 6)),  // iso
-                new Triangle(Point.of(9, 1), Point.of(12, 1), Point.of(11, 4)), // ar
-                new Triangle(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4)) // right iso
+                Triangle.of(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)), // equa
+                Triangle.of(Point.of(1, 1), Point.of(3, 1), Point.of(1, 4)), //right
+                Triangle.of(Point.of(5, 2), Point.of(7, 2), Point.of(6, 6)),  // iso
+                Triangle.of(Point.of(9, 1), Point.of(12, 1), Point.of(11, 4)), // ar
+                Triangle.of(Point.of(14, 1), Point.of(17, 1), Point.of(14, 4)) // right iso
         ));
 
         assertEquals(4, map.size());

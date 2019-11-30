@@ -67,11 +67,11 @@ public class Main {
 
     public static void main(String[] args) {
         List<Triangle> triangles = Arrays.asList(
-                new Triangle(Point.of(1, 2), Point.of(5, 2), Point.of(1, 6)),
-                new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 5)),
-                new Triangle(Point.of(1, 1), Point.of(4, 1), Point.of(1, 4)),
-                new Triangle(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)),
-                new Triangle(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0))
+                Triangle.of(Point.of(1, 2), Point.of(5, 2), Point.of(1, 6)),
+                Triangle.of(Point.of(1, 1), Point.of(4, 1), Point.of(1, 5)),
+                Triangle.of(Point.of(1, 1), Point.of(4, 1), Point.of(1, 4)),
+                Triangle.of(Point.of(1, 1), Point.of(7, 1), Point.of(4, 6.196152423)),
+                Triangle.of(Point.of(0, 0), Point.of(1, 2), Point.of(3, 0))
         );
 
         sortByType(triangles).forEach((t, l) -> {

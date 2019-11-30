@@ -13,7 +13,7 @@ public class Triangle {
     final double perimeter;
     final Set<Type> type;
 
-    Triangle(Point a, Point b, Point c) {
+    private Triangle(Point a, Point b, Point c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -21,6 +21,13 @@ public class Triangle {
         square = getSquare();
         perimeter = getPerimeter();
         type = getType();
+    }
+
+    static Triangle of(Point a, Point b, Point c) {
+        if (a == null || b == null || c == null) {
+            throw new IllegalArgumentException();
+        }
+        return new Triangle(a, b, c);
     }
 
     private double getSquare() {
