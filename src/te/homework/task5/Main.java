@@ -14,7 +14,7 @@ public class Main {
 
         Set<String> words = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
-        for (String line : getFileLines("raven.txt")) {
+        for (String line : getFileLines("raven.text")) {
             words.addAll(Arrays.asList(line.split("[^a-zA-Z]")));
         }
 
