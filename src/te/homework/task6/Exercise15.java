@@ -6,10 +6,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/*
- Задан файл текстом на английскмо языке. Выделить все различные слова. Слова, отличающиеся только регистром, считать
- одинаковыми. Использовать класс HashMap.
-* */
 
 public interface Exercise15 {
     static List<String> getLines(String filename) {
@@ -37,7 +33,7 @@ public interface Exercise15 {
         }
 
         return lines.stream()
-                .flatMap(line -> Arrays.stream(line.split("\\s+|\\.|,")))
+                .flatMap(line -> Arrays.stream(line.split("[^a-zA-Z0-9]")))
                 .filter(line -> line.length() > 0)
                 .collect(Collectors.groupingBy(String::toLowerCase, HashMap::new, Collectors.counting()));
     }
