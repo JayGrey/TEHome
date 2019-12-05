@@ -2,9 +2,9 @@ package te.homework.task1;
 
 import te.homework.task1.instruments.Instrument;
 import te.homework.task1.instruments.wind.WindFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WindFactoryTest {
 

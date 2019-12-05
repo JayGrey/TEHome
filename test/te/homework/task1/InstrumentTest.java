@@ -1,27 +1,29 @@
 package te.homework.task1;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import te.homework.task1.instruments.stringed.Stringed;
 import te.homework.task1.instruments.stringed.StringedFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class InstrumentTest {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private final PrintStream originalStream = System.out;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStream));
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         System.setOut(originalStream);
     }
