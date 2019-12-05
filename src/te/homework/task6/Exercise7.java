@@ -3,9 +3,7 @@ package te.homework.task6;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/*
- Задать два стека, поменять информацию местами.
-* */
+
 public interface Exercise7 {
     static <T> void swapStacks(Deque<T> stack1, Deque<T> stack2) {
         if (stack1 == null || stack2 == null) {
