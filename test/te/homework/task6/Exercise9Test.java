@@ -2,6 +2,9 @@ package te.homework.task6;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,10 +14,11 @@ class Exercise9Test {
     @Test
     void testOnTrashData() {
         assertTrue(Double.isNaN(Exercise9.findK(null, null)));
-        assertTrue(Double.isNaN(Exercise9.findK(new double[0], null)));
-        assertTrue(Double.isNaN(Exercise9.findK(null, new double[0])));
-        assertTrue(Double.isNaN(Exercise9.findK(new double[0], new double[0])));
-        assertTrue(Double.isNaN(Exercise9.findK(new double[]{1, 2}, new double[]{1, 2, 3})));
+        assertTrue(Double.isNaN(Exercise9.findK(Collections.emptyList(), null)));
+        assertTrue(Double.isNaN(Exercise9.findK(null, Collections.emptyList())));
+        assertTrue(Double.isNaN(Exercise9.findK(Collections.emptyList(), Collections.emptyList())));
+        assertTrue(Double.isNaN(Exercise9.findK(Arrays.asList(1.0, 2.0),
+                Arrays.asList(1.0, 2.0, 3.0))));
     }
 
     @Test
@@ -26,13 +30,11 @@ class Exercise9Test {
         };
 
         double expected = findK(data);
-        System.out.println(expected);
-
 
         assertEquals(expected,
                 Exercise9.findK(
-                        new double[]{1, 2, 2, 3, 5, 3, 4, 7},
-                        new double[]{2, 2, 4, 4, 5, 6, 8, 10}
+                        Arrays.asList(1.0, 2.0, 2.0, 3.0, 5.0, 3.0, 4.0, 7.0),
+                        Arrays.asList(2.0, 2.0, 4.0, 4.0, 5.0, 6.0, 8.0, 10.0)
                 ),
                 EPSILON);
     }
@@ -45,19 +47,18 @@ class Exercise9Test {
         };
 
         double expected = findK(data);
-        System.out.println(expected);
 
         assertEquals(expected,
                 Exercise9.findK(
-                        new double[]{-2, -4, -3, -5, 2, 1},
-                        new double[]{3, 3, 5, 6, -1, -3}
+                        Arrays.asList(-2.0, -4.0, -3.0, -5.0, 2.0, 1.0),
+                        Arrays.asList(3.0, 3.0, 5.0, 6.0, -1.0, -3.0)
                 ),
                 EPSILON);
     }
 
     @Test
     void testOnSinglePoint() {
-        assertEquals(1.0, Exercise9.findK(new double[]{1}, new double[]{1}), EPSILON);
+        assertEquals(1.0, Exercise9.findK(Collections.singletonList(1.0), Collections.singletonList(1.0)), EPSILON);
     }
 
     private double findK(double[][] values) {

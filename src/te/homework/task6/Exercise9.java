@@ -1,12 +1,6 @@
 package te.homework.task6;
 
-/*
-    Списки (стеки, очереди) I(1..n) и U(1..n) содержат результаты n-измерений тока и напряжения
-    на неизвестном сопротивлении R.
-
-    Найт приблеженное число R методом наименьших квадратов.
-*/
-
+import java.util.List;
 import java.util.function.UnaryOperator;
 import java.util.stream.IntStream;
 
@@ -17,16 +11,16 @@ abstract class Exercise9 {
 
     }
 
-    static double findK(double[] x, double[] y) {
-        if (x == null || y == null || x.length == 0 || y.length == 0 || x.length != y.length) {
+    static double findK(List<Double> x, List<Double> y) {
+        if (x == null || y == null || y.size() == 0 || x.size() != y.size()) {
             return Double.NaN;
         }
 
         double kMin, kMax;
-        kMin = kMax = y[0] / x[0];
+        kMin = kMax = y.get(0) / x.get(0);
 
-        for (int i = 1; i < x.length; i++) {
-            double kTemp = y[i] / x[i];
+        for (int i = 1; i < x.size(); i++) {
+            double kTemp = y.get(i) / x.get(i);
             kMin = Math.min(kMin, kTemp);
             kMax = Math.max(kMax, kTemp);
         }
@@ -34,14 +28,14 @@ abstract class Exercise9 {
         return process(x, y, kMin, kMax);
     }
 
-    private static double epsilon(double[] x, double[] y, UnaryOperator<Double> func) {
+    private static double epsilon(List<Double> x, List<Double> y, UnaryOperator<Double> func) {
         return IntStream
-                .range(0, x.length)
-                .mapToDouble(i -> (y[i] - func.apply(x[i])) * (y[i] - func.apply(x[i])))
+                .range(0, x.size())
+                .mapToDouble(i -> Math.pow(y.get(i) - func.apply(x.get(i)), 2))
                 .sum();
     }
 
-    private static double process(double[] x, double[] y, double kMin, double kMax) {
+    private static double process(List<Double> x, List<Double> y, double kMin, double kMax) {
         double kMid = (kMax + kMin) / 2;
 
         double eMax = epsilon(x, y, a -> kMax * a);
