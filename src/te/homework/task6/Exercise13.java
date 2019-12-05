@@ -2,10 +2,6 @@ package te.homework.task6;
 
 import java.util.List;
 
-/*
- Не используя вспомогательных объектов, переставить отрицательные элементы данного
-списка в конец, а положительные — в начало списка.
- */
 public interface Exercise13 {
     static void reorderList(List<Double> list) {
         if (list == null || list.size() == 0) {
