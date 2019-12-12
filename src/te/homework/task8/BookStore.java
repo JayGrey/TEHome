@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 
 public class BookStore {
     private List<Book> books;
+    private boolean persist;
+
+    BookStore() {
+        books = new ArrayList<>();
+        persist = true;
+    }
 
     void load(String filename) {
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(filename))) {
@@ -19,14 +25,11 @@ public class BookStore {
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .collect(Collectors.toList());
+            persist = true;
         } catch (Exception e) {
             e.printStackTrace(System.err);
             books = Collections.emptyList();
         }
-    }
-
-    BookStore() {
-        books = new ArrayList<>();
     }
 
     private Optional<Book> stringToBook(String line) {
@@ -73,6 +76,7 @@ public class BookStore {
     void add(Book book) {
         if (book != null) {
             books.add(book);
+            persist = false;
         }
     }
 
@@ -80,12 +84,16 @@ public class BookStore {
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).equals(oldBook)) {
                 books.set(i, newBook);
+                persist = false;
             }
         }
     }
 
     void delete(Book book) {
-        books.removeIf(b -> b.equals(book));
+        boolean removed = books.removeIf(b -> b.equals(book));
+        if (removed) {
+            persist = false;
+        }
     }
 
     public void save(String filename) {
@@ -93,8 +101,14 @@ public class BookStore {
             books.stream()
                     .map(this::bookToString)
                     .forEach(writer::println);
+
+            persist = true;
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
+    }
+
+    public boolean isPersist() {
+        return persist;
     }
 }

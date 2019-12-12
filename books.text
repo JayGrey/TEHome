@@ -1,0 +1,11 @@
+title 1|author 1|120|REGULAR|120.00
+title 2|author 2|120|REGULAR|130.00
+title 3|author 3|120|REGULAR|140.00
+title 4|author 4|120|REGULAR|13.00
+title 21|author 21|220|NEW|120.00
+title 22|author 22|230|NEW|130.00
+title 22|author 23|250|NEW|140.00
+book title 42|author 22|230|CHILD|130.00
+title 52|author 23|250|CHILD|140.00
+bestseller title 52|author 23|250|BESTSELLER|140.00
+a|b|100|REGULAR|1000.00
