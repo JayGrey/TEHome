@@ -1,22 +1,20 @@
 package te.homework.task8;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookStore {
     private List<Book> books;
 
-    public void load(String filename) {
-        try {
-            books = Files.lines(Paths.get(filename))
+    void load(String filename) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filename))) {
+
+            books = reader.lines()
                     .map(this::stringToBook)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
@@ -27,21 +25,21 @@ public class BookStore {
         }
     }
 
-    public BookStore() {
+    BookStore() {
         books = new ArrayList<>();
     }
 
     private Optional<Book> stringToBook(String line) {
         try {
 
-            String[] tokens = line.split("|");
+            String[] tokens = line.split("\\|");
 
             return Optional.of(new Book(
                     tokens[0].trim(),
                     tokens[1].trim(),
                     Integer.parseInt(tokens[2].trim()),
                     Book.Type.valueOf(tokens[3].trim().toUpperCase()),
-                    new BigDecimal(tokens[4].trim())
+                    tokens[4].trim()
             ));
         } catch (RuntimeException e) {
             e.printStackTrace(System.err);
@@ -53,31 +51,32 @@ public class BookStore {
         if (book == null) {
             return "";
         }
-
-        return book.getTitle() + "|"
-                + book.getAuthor() + "|"
-                + book.getPages() + "|"
-                + book.getType().name() + "|"
-                + book.getPrice();
+        return String.format(Locale.ENGLISH, "%s|%s|%d|%s|%.02f",
+                book.getTitle().replace("|", ""),
+                book.getAuthor().replace("|", ""),
+                book.getPages(),
+                book.getType().name(),
+                book.getPrice()
+        );
     }
 
-    public List<Book> getAll() {
+    List<Book> getAll() {
         return new ArrayList<>(books);
     }
 
-    public List<Book> getByType(Book.Type type) {
+    List<Book> getByType(Book.Type type) {
         return books.stream()
                 .filter(b -> b.getType() == type)
                 .collect(Collectors.toList());
     }
 
-    public void add(Book book) {
+    void add(Book book) {
         if (book != null) {
             books.add(book);
         }
     }
 
-    public void update(Book oldBook, Book newBook) {
+    void update(Book oldBook, Book newBook) {
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).equals(oldBook)) {
                 books.set(i, newBook);
@@ -85,7 +84,7 @@ public class BookStore {
         }
     }
 
-    public void delete(Book book) {
+    void delete(Book book) {
         books.removeIf(b -> b.equals(book));
     }
 

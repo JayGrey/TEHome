@@ -1,6 +1,7 @@
 package te.homework.task8;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Objects;
 
 public class Book {
@@ -10,51 +11,51 @@ public class Book {
     private Type type;
     private BigDecimal price;
 
-    public Book(String title, String author, int pages, Type type, BigDecimal price) {
+    Book(String title, String author, int pages, Type type, String price) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.type = type;
-        this.price = price;
+        this.price = new BigDecimal(price, new MathContext(2));
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
-    public String getAuthor() {
+    String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    void setAuthor(String author) {
         this.author = author;
     }
 
-    public int getPages() {
+    int getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    void setPages(int pages) {
         this.pages = pages;
     }
 
-    public Type getType() {
+    Type getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    void setType(Type type) {
         this.type = type;
     }
 
-    public BigDecimal getPrice() {
+    BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -77,5 +78,16 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(title, author, pages, type, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Book {" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", pages=" + pages +
+                ", type=" + type +
+                ", price=" + price +
+                '}';
     }
 }
