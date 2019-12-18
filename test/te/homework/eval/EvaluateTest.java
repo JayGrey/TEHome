@@ -27,4 +27,17 @@ class EvaluateTest {
         assertEquals(15.0, new Evaluate().eval("1 + (2 + (3 * 4))"));
         assertEquals(10.0, new Evaluate().eval("(1 + 2) * (3 + 4) - ( 5 + 6)"));
     }
+
+    @Test
+    void evalNumbersWithFractions() {
+        assertEquals(3.0, new Evaluate().eval("1.5 + 1.5"));
+        assertEquals(2.0, new Evaluate().eval("1.5 + 0.5"));
+        assertEquals(2.0, new Evaluate().eval("1.5 + .5"));
+        assertEquals(6.5, new Evaluate().eval("1.5 + 5."));
+    }
+
+    @Test
+    void evalWithNegativeNumbers() {
+        assertEquals(0, new Evaluate().eval("-2 + 2"));
+    }
 }

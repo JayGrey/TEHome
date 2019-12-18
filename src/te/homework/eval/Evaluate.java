@@ -145,11 +145,7 @@ public class Evaluate {
         return tokens;
     }
 
-  /*  private enum NodeType {
-        OPERATION_ADD, OPERATION_SUBTRACT, OPERATION_MULTIPLY, OPERATION_DIVIDE, NUMERIC
-    }*/
-
-    public enum TokenType {
+    enum TokenType {
         OPERATION_ADD, OPERATION_SUBTRACT, OPERATION_MULTIPLY, OPERATION_DIVIDE, NUMERIC,
         OPEN_BRACE, CLOSE_BRACE, EMPTY
     }
