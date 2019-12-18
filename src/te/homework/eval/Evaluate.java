@@ -1,13 +1,13 @@
 package te.homework.eval;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static te.homework.eval.Evaluate.TokenType.*;
 
 public class Evaluate {
 
+    // from least to most
     private TokenType[] operationPriority = {OPERATION_ADD, OPERATION_SUBTRACT,
             OPERATION_MULTIPLY, OPERATION_DIVIDE};
 
@@ -92,57 +92,122 @@ public class Evaluate {
         return new Node(EMPTY, Double.NaN);
     }
 
+
     private List<Token> tokenize(String input) {
-        List<Token> tokens = new ArrayList<>();
+        List<Token> result = new ArrayList<>();
 
-        StringBuilder numBuffer = new StringBuilder();
-        for (char ch : input.toCharArray()) {
-            if (Character.isDigit(ch) || ch == '.') {
-                numBuffer.append(ch);
-                continue;
-            }
-
-            if (numBuffer.length() > 0) {
-                tokens.add(new Token(TokenType.NUMERIC, Double.parseDouble(numBuffer.toString())));
-                numBuffer.delete(0, numBuffer.length());
-            }
-
-            switch (ch) {
-                case '+': {
-                    tokens.add(new Token(TokenType.OPERATION_ADD));
-                    break;
-                }
-                case '-': {
-                    tokens.add(new Token(TokenType.OPERATION_SUBTRACT));
-                    break;
-                }
-                case '*': {
-                    tokens.add(new Token(TokenType.OPERATION_MULTIPLY));
-                    break;
-                }
-                case '/': {
-                    tokens.add(new Token(TokenType.OPERATION_DIVIDE));
-                    break;
-                }
-                case '(': {
-                    tokens.add(new Token(OPEN_BRACE));
-                    break;
-                }
-                case ')': {
-                    tokens.add(new Token(TokenType.CLOSE_BRACE));
-                    break;
-                }
+        Deque<Character> deque = new LinkedList<>();
+        for (char c : input.toCharArray()) {
+            if (!Character.isSpaceChar(c)) {
+                deque.addFirst(c);
             }
         }
 
-        if (numBuffer.length() > 0) {
-            tokens.add(new Token(TokenType.NUMERIC, Double.parseDouble(numBuffer.toString())));
+        expression(result, deque);
+
+        return result;
+    }
+
+    private void subExpression(List<Token> tokens, Deque<Character> deque) {
+        char ch = !deque.isEmpty() ? deque.peekLast() : 0;
+        if (ch == '(') {
+            deque.removeLast();
+            tokens.add(Token.OPEN_BRACE);
+            expression(tokens, deque);
+            ch = !deque.isEmpty() ? deque.peekLast() : 0;
+            if (ch == ')') {
+                deque.removeLast();
+                tokens.add(Token.CLOSE_BRACE);
+            }
+        }
+    }
+
+    private void expression(List<Token> tokens, Deque<Character> deque) {
+        char ch = !deque.isEmpty() ? deque.peekLast() : 0;
+
+        // subexpression
+        if (ch == '(') {
+            subExpression(tokens, deque);
+        } else {
+            getNumber(deque).ifPresent(tokens::add);
         }
 
-        // todo: correctly process negative numbers
 
+        while (!deque.isEmpty() && deque.peekLast() != ')') {
+            getOperation(deque).ifPresent(tokens::add);
 
-        return tokens;
+            ch = !deque.isEmpty() ? deque.peekLast() : 0;
+            if (ch == '(') {
+                subExpression(tokens, deque);
+            } else {
+                getNumber(deque).ifPresent(tokens::add);
+            }
+
+        }
+    }
+
+    private Optional<Token> getOperation(Deque<Character> deque) {
+        char ch = !deque.isEmpty() ? deque.removeLast() : 0;
+        switch (ch) {
+            case '+': {
+                return Optional.of(Token.ADD);
+            }
+            case '-': {
+                return Optional.of(Token.SUBTRACT);
+            }
+            case '/': {
+                return Optional.of(Token.DIVIDE);
+            }
+            case '*': {
+                return Optional.of(Token.MULTIPLY);
+            }
+            default: {
+                return Optional.empty();
+            }
+        }
+    }
+
+    private Optional<Token> getNumber(Deque<Character> deque) {
+        StringBuilder buffer = new StringBuilder();
+
+        // 1
+        char ch = !deque.isEmpty() ? deque.peekLast() : 0;
+        if (ch == '+' || ch == '-') {
+            buffer.append(deque.pollLast());
+        }
+
+        ch = !deque.isEmpty() ? deque.peekLast() : 0;
+        if (Character.isDigit(ch)) {
+            while (!deque.isEmpty() && Character.isDigit(deque.peekLast())) {
+                buffer.append(deque.pollLast());
+            }
+
+            ch = !deque.isEmpty() ? deque.peekLast() : 0;
+            if (ch == '.') {
+                buffer.append(deque.pollLast());
+            }
+
+            while (!deque.isEmpty() && Character.isDigit(deque.peekLast())) {
+                buffer.append(deque.pollLast());
+            }
+
+        } else if (ch == '.') {
+            buffer.append(deque.pollLast());
+
+            ch = !deque.isEmpty() ? deque.peekLast() : 0;
+            if (Character.isDigit(ch)) {
+                while (!deque.isEmpty() && Character.isDigit(deque.peekLast())) {
+                    buffer.append(deque.pollLast());
+                }
+            } else {
+                return Optional.empty();
+            }
+
+        } else {
+            return Optional.empty();
+        }
+
+        return Optional.of(new Token(NUMERIC, Double.parseDouble(buffer.toString())));
     }
 
     enum TokenType {
@@ -156,32 +221,38 @@ public class Evaluate {
         final Node left;
         final Node right;
 
-        public Node(TokenType type, double value, Node left, Node right) {
+        Node(TokenType type, double value, Node left, Node right) {
             this.type = type;
             this.value = value;
             this.right = right;
             this.left = left;
         }
 
-        public Node(TokenType type, double value) {
+        Node(TokenType type, double value) {
             this(type, value, null, null);
         }
 
-        public Node(TokenType type, Node left, Node right) {
+        Node(TokenType type, Node left, Node right) {
             this(type, Double.NaN, left, right);
         }
     }
 
     private static class Token {
+        private final static Token ADD = new Token(OPERATION_ADD);
+        private final static Token DIVIDE = new Token(OPERATION_DIVIDE);
+        private final static Token MULTIPLY = new Token(OPERATION_MULTIPLY);
+        private final static Token SUBTRACT = new Token(OPERATION_SUBTRACT);
+        private final static Token OPEN_BRACE = new Token(TokenType.OPEN_BRACE);
+        private final static Token CLOSE_BRACE = new Token(TokenType.CLOSE_BRACE);
         final TokenType type;
         final double value;
 
-        public Token(TokenType type, double value) {
+        Token(TokenType type, double value) {
             this.type = type;
             this.value = value;
         }
 
-        public Token(TokenType type) {
+        Token(TokenType type) {
             this.type = type;
             this.value = Double.NaN;
         }
